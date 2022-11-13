@@ -21,7 +21,7 @@ struct ContentView: View {
     private let userDefaultKey = ""
     
     let backgroundGradient = LinearGradient(
-        colors: [.indigo, .cyan],
+        colors: [.white, .black],
         startPoint: .top, endPoint: .bottomTrailing)
     
     

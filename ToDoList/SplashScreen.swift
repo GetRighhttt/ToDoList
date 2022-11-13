@@ -18,7 +18,7 @@ struct SplashScreen: View {
     @State private var opacity = 0.5
     
     let backgroundGradient = LinearGradient(
-        colors: [.indigo, .cyan],
+        colors: [.black, .white],
         startPoint: .top, endPoint: .bottomTrailing)
     
     var body: some View {
@@ -30,25 +30,25 @@ struct SplashScreen: View {
                 backgroundGradient.ignoresSafeArea()
                 VStack {
                     VStack {
-                        Image(systemName: "checkmark.seal")
-                            .font(.system(size: 80))
+                        Image(systemName: "bolt")
+                            .font(.system(size: 40))
                             .foregroundColor(.white)
-                        Text("Do It!")
-                            .font(Font.custom("Baskerville-Bold", size: 26))
-                            .foregroundColor(.white.opacity(0.9))
+                        Text("DO IT!")
+                            .font(Font.custom("Baskerville-Bold", size: 16))
+                            .foregroundColor(.white.opacity(0.8))
                     }
                     .scaleEffect(size)
                     .opacity(opacity)
                     .onAppear {
-                        withAnimation(.easeIn(duration: 1.3)) {
-                            self.size = 1.4
+                        withAnimation(.easeIn(duration: 0.9)) {
+                            self.size = 3.0
                             self.opacity = 1.0
                         }
                     }
                 }
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                        withAnimation(.easeOut(duration: 0.5)) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        withAnimation(.easeOut(duration: 0.8)) {
                             self.isActive = true
                         }
                         self.isActive = true
