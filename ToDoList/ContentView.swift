@@ -44,6 +44,7 @@ struct ContentView: View {
                 List {
                     ForEach(listTodos) { todoItem in
                         Text(todoItem.todo)
+                            .padding(.bottom, 2)
                     }.onDelete(perform: deleteTodos)
                     .listRowBackground(Color.black)
                     .foregroundColor(Color.white)
