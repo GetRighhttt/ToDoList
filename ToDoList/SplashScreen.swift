@@ -39,7 +39,7 @@ struct SplashScreen: View {
                             .foregroundColor(.white)
                         Text("DO IT!")
                             .font(Font.custom("Baskerville-Bold", size: 16))
-                            .foregroundColor(.white.opacity(0.8))
+                            .foregroundColor(.white.opacity(1.0))
                     }
                     .scaleEffect(size)
                     .opacity(opacity)
