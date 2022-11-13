@@ -27,7 +27,6 @@ struct SplashScreen: View {
         startPoint: .top, endPoint: .bottomTrailing)
     
     var body: some View {
-        
         if isActive {
             ContentView()
         } else {
@@ -46,7 +45,7 @@ struct SplashScreen: View {
                     .opacity(opacity)
                     .onAppear {
                         withAnimation(.easeIn(duration: 0.9)) {
-                            self.size = 3.0
+                            self.size = 2.8
                             self.opacity = 1.0
                         }
                     }
