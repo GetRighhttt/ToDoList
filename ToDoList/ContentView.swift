@@ -32,7 +32,7 @@ struct ContentView: View {
                 backgroundGradient.ignoresSafeArea()
                 VStack {
                     HStack {
-                        TextField("Add Todo.", text: $newTodo)
+                        TextField("Add Something you Need to Do!", text: $newTodo)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                         //Buttons have actions and
                         Button(action: {
@@ -60,7 +60,7 @@ struct ContentView: View {
                     .scrollContentBackground(.hidden)
                     .listStyle(InsetGroupedListStyle())
                 }
-                .navigationBarTitle("Todo List")
+                .navigationBarTitle("Get It Done!")
             }
             .onAppear(perform: loadTodos)
         }

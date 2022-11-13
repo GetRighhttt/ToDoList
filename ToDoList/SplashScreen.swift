@@ -30,10 +30,10 @@ struct SplashScreen: View {
                 backgroundGradient.ignoresSafeArea()
                 VStack {
                     VStack {
-                        Image(systemName: "filemenu.and.cursorarrow")
+                        Image(systemName: "checkmark.seal")
                             .font(.system(size: 80))
                             .foregroundColor(.white)
-                        Text("To Do")
+                        Text("Do It!")
                             .font(Font.custom("Baskerville-Bold", size: 26))
                             .foregroundColor(.white.opacity(0.9))
                     }
