@@ -20,43 +20,51 @@ struct ContentView: View {
      */
     private let userDefaultKey = ""
     
+    let backgroundGradient = LinearGradient(
+        colors: [.indigo, .cyan],
+        startPoint: .top, endPoint: .bottomTrailing)
+    
     
     var body: some View {
+        
         NavigationView {
-            VStack {
-                HStack {
-                    TextField("Add Todo.", text: $newTodo)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    //Buttons have actions and
-                    Button(action: {
-                        // if new todo is empty, return or add new item.
-                        guard !self.newTodo.isEmpty else { return }
-                        self.listTodos.append(TodoItem(todo: self.newTodo))
-                        self.newTodo = ""
-                        self.saveTodos()
-                    }) {
-                        // add plus sign at the end of Hstack
-                        Image(systemName: "plus")
+            ZStack {
+                backgroundGradient.ignoresSafeArea()
+                VStack {
+                    HStack {
+                        TextField("Add Todo.", text: $newTodo)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        //Buttons have actions and
+                        Button(action: {
+                            // if new todo is empty, return or add new item.
+                            guard !self.newTodo.isEmpty else { return }
+                            self.listTodos.append(TodoItem(todo: self.newTodo))
+                            self.newTodo = ""
+                            self.saveTodos()
+                        }) {
+                            // add plus sign at the end of Hstack
+                            Image(systemName: "plus")
+                                .foregroundColor(Color.white)
+                                .font(.system(size: 20))
+                        }.padding(.leading, 5)
+                    }.padding()
+                    
+                    List {
+                        ForEach(listTodos) { todoItem in
+                            Text(todoItem.todo)
+                                .padding(.bottom, 2)
+                        }.onDelete(perform: deleteTodos)
+                            .listRowBackground(Color.black)
                             .foregroundColor(Color.white)
-                    }.padding(.leading, 5)
-                }.padding()
-                
-                List {
-                    ForEach(listTodos) { todoItem in
-                        Text(todoItem.todo)
-                            .padding(.bottom, 2)
-                    }.onDelete(perform: deleteTodos)
-                    .listRowBackground(Color.black)
-                    .foregroundColor(Color.white)
+                    }
+                    .scrollContentBackground(.hidden)
+                    .listStyle(InsetGroupedListStyle())
                 }
-                .background(.cyan)
-                .scrollContentBackground(.hidden)
-                .listStyle(InsetGroupedListStyle())
+                .navigationBarTitle("Todo List")
             }
-            .navigationBarTitle("Todo List")
-            .background(.cyan)
+            .onAppear(perform: loadTodos)
         }
-        .onAppear(perform: loadTodos)
+        
     }
     
     /*
