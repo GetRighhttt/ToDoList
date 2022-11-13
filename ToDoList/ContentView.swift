@@ -33,6 +33,7 @@ struct ContentView: View {
                         guard !self.newTodo.isEmpty else { return }
                         self.listTodos.append(TodoItem(todo: self.newTodo))
                         self.newTodo = ""
+                        self.saveTodos()
                     }) {
                         // add plus sign at the end of Hstack
                         Image(systemName: "plus")
@@ -43,9 +44,9 @@ struct ContentView: View {
                 List {
                     ForEach(listTodos) { todoItem in
                         Text(todoItem.todo)
-                    }
+                    }.onDelete(perform: deleteTodos)
                     .listRowBackground(Color.black)
-                    .foregroundColor(Color.yellow)
+                    .foregroundColor(Color.white)
                 }
                 .background(.cyan)
                 .scrollContentBackground(.hidden)
@@ -54,21 +55,45 @@ struct ContentView: View {
             .navigationBarTitle("Todo List")
             .background(.cyan)
         }
+        .onAppear(perform: loadTodos)
     }
     
-    private saveTodos() {
-        
+    /*
+     Method to save list of todo items so when the app closes, it saves.
+     */
+    private func saveTodos() {
+        UserDefaults.standard.set( try?  PropertyListEncoder().encode(self.listTodos),
+                                   forKey: userDefaultKey)
+    }
+    
+    /*
+     Methode to load todos, and read from user defaults.
+     */
+    private func loadTodos() {
+        if let todosData = UserDefaults.standard.value(forKey: userDefaultKey) as? Data {
+            if let todosList = try? PropertyListDecoder().decode(Array<TodoItem>.self, from: todosData) {
+                self.listTodos = todosList
+            }
+        }
+    }
+    
+    /*
+     Method to delete todos at the proper index.
+     */
+    private func deleteTodos(at offsets: IndexSet) {
+        self.listTodos.remove(atOffsets: offsets)
+        saveTodos()
     }
 }
 
 
 /*
  This struct defines our todo item. We have an ID to
- signify which one is being selected, and a string to name
+ sigvary which one is being selected, and a string to name
  the actual todo.
  */
 struct TodoItem : Codable, Identifiable {
-    let id = UUID()
+    var id = UUID()
     let todo: String
 }
 
