@@ -20,16 +20,10 @@ struct ContentView: View {
      */
     private let userDefaultKey = ""
     
-    let backgroundGradient = LinearGradient(
-        colors: [.white, .black],
-        startPoint: .top, endPoint: .bottomTrailing)
-    
-    
     var body: some View {
         
         NavigationView {
             ZStack {
-                backgroundGradient.ignoresSafeArea()
                 VStack {
                     HStack {
                         TextField("Add Something you Need to Do!", text: $newTodo)
@@ -44,7 +38,6 @@ struct ContentView: View {
                         }) {
                             // add plus sign at the end of Hstack
                             Image(systemName: "plus")
-                                .foregroundColor(Color.white)
                                 .font(.system(size: 20))
                         }.padding(.leading, 5)
                     }.padding()
@@ -54,11 +47,9 @@ struct ContentView: View {
                             Text(todoItem.todo)
                                 .padding(.bottom, 2)
                         }.onDelete(perform: deleteTodos)
-                            .listRowBackground(Color.black)
-                            .foregroundColor(Color.white)
                     }
                     .scrollContentBackground(.hidden)
-                    .listStyle(InsetGroupedListStyle())
+                    .listStyle(.plain)
                 }
                 .navigationBarTitle("Get It Done!")
             }

@@ -23,7 +23,7 @@ struct SplashScreen: View {
     }
     
     let backgroundGradient = LinearGradient(
-        colors: [.black, .white],
+        colors: [.white, .white],
         startPoint: .top, endPoint: .bottomTrailing)
     
     var body: some View {
@@ -34,12 +34,9 @@ struct SplashScreen: View {
                 backgroundGradient.ignoresSafeArea()
                 VStack {
                     VStack {
-                        Image(systemName: "bolt")
+                        Image(systemName: "list.clipboard")
                             .font(.system(size: 40))
-                            .foregroundColor(.white)
-                        Text("DO IT!")
-                            .font(Font.custom("Baskerville-Bold", size: 16))
-                            .foregroundColor(.white.opacity(1.0))
+                            .foregroundColor(.black)
                     }
                     .scaleEffect(size)
                     .opacity(opacity)
