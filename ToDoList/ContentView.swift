@@ -45,6 +45,43 @@ struct ContentView: View {
                     List {
                         ForEach(listTodos) { todoItem in
                             Text(todoItem.todo)
+                            
+                            /*
+                             Left swipe actions for the list!
+                             */
+                                .swipeActions(edge: .leading) {
+                                    Button {
+                                        print("Saved")
+                                    } label: {
+                                        Label("Saved", systemImage: "square.and.arrow.down.on.square")
+                                    }.tint(Color.green)
+                                }
+                            
+                                .swipeActions {
+                                    
+                                    /*
+                                     Here is how we add swipe actions, and customize them
+                                     a little bit.
+                                     */
+                                    Button(role: .destructive) {
+                                        print("Delete")
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                    
+                                    Button(role: .cancel){
+                                        print("Cancel")
+                                    } label: {
+                                        Label("Cancel", systemImage: "x.circle")
+                                    }.tint(Color.orange)
+                                    
+                                    Button{
+                                        print("Present More")
+                                    } label: {
+                                        Label("More", systemImage: "ellipsis")
+                                    }.tint(Color.yellow)
+
+                                }
                                 .padding(.bottom, 2)
                         }.onDelete(perform: deleteTodos)
                     }
