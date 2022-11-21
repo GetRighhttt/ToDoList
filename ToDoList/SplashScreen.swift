@@ -22,34 +22,28 @@ struct SplashScreen: View {
         Animation.easeOut
     }
     
-    let backgroundGradient = LinearGradient(
-        colors: [.white, .white],
-        startPoint: .top, endPoint: .bottomTrailing)
-    
     var body: some View {
         if isActive {
             ContentView()
         } else {
             ZStack {
-                backgroundGradient.ignoresSafeArea()
                 VStack {
                     VStack {
                         Image(systemName: "list.clipboard")
                             .font(.system(size: 40))
-                            .foregroundColor(.black)
                     }
                     .scaleEffect(size)
                     .opacity(opacity)
                     .onAppear {
-                        withAnimation(.easeIn(duration: 0.9)) {
+                        withAnimation(.easeIn(duration: 0.5)) {
                             self.size = 2.8
                             self.opacity = 1.0
                         }
                     }
                 }
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                        withAnimation(.easeOut(duration: 0.8)) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                        withAnimation(.easeOut(duration: 0.5)) {
                             self.isActive = true
                         }
                         self.isActive = true
